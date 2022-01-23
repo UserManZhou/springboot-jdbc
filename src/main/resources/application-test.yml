@@ -1,0 +1,5 @@
+person:
+  name: "bnuiwaghui-test"
+  age: 21
+server:
+  port: 8000

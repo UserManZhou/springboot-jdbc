@@ -1,0 +1,87 @@
+spring:
+  profiles:
+    active: ppd
+#    group:
+#      prod:
+#        - pdd
+#        - prod
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+  datasource:
+    url: jdbc:mysql://localhost:3306/web
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      aop-patterns: com.springboot.*
+      filters: stat,wall
+      filter:
+        stat:
+          slow-sql-millis: 10000
+          log-slow-sql: true
+      enable: true
+      stat-view-servlet:
+        login-username: admin
+        login-password: admin
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: 'false'
+      reset-stat-enable: false
+      web-stat-filter:
+        enabled: true
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+        url-pattern: /*
+        session-stat-enable: 'true'
+logging:
+  level:
+    com.springboot.jdbc: info
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    com.ibatis=debug: debug
+    com.ibatis.common.jdbc.SimpleDataSource: debug
+    com.springboot.jdbc.mapper: debug
+    com.springboot.jdbc.service: debug
+
+
+  pattern:
+    console: "%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n"
+  file:
+    name: F:\\JavaCode\\Springboot\\springboot-jdbc\\springboot-jdbc-log\\spring-boot-jdbc.log
+
+
+mybatis:
+  #  config-location: classpath:/mybatis-config/mybatisConfig.xml
+  mapper-locations: classpath:/mybatis-config/mapper/*
+  configuration:
+    map-underscore-to-camel-case: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    enabled-by-default: true
+  endpoint:
+    shutdown:
+      enabled: false
+    health:
+      show-details: always
+      enabled: true
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+    beans:
+      enabled: true
+# INFO ENDPOINT CONFIGURATION
+spring-info:
+  name: @project.name@
+  description: @project.description@
+  version: @project.version@
+  encoding: @project.build.sourceEncoding@
+server:
+  port: 8081
+#person:
+#  name: "dawnjkdhjaw"
+#  age: 12
